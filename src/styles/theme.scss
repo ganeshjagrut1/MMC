@@ -1,0 +1,78 @@
+// =============================================================
+//  ONE-TIME THEME / COLOR SETUP
+//  Change brand colors HERE and they propagate everywhere
+//  (Tailwind utilities, components, SCSS modules).
+//
+//  How it works:
+//   1. SCSS variables below are the single source of truth.
+//   2. They are emitted as CSS custom properties on :root.
+//   3. globals.css maps those CSS vars into Tailwind v4's @theme,
+//      so you get utilities like `bg-primary`, `text-accent`, etc.
+// =============================================================
+
+// ---- Brand palette (derived from the college logo) ----
+// Logo = bright azure blue ring + deep blue + white, saffron accent.
+$brand-primary:        #0096d6; // azure blue (logo ring)
+$brand-primary-dark:   #006fb0;
+$brand-primary-light:  #34b6e6;
+
+$brand-secondary:      #003f80; // deep blue (logo inner / book)
+$brand-secondary-dark: #002c5c;
+
+$brand-accent:         #f2900d; // saffron (saint's turban / title text)
+$brand-accent-dark:    #cc7a00;
+
+// ---- Neutrals (cool, to sit with the blue brand) ----
+$neutral-bg:      #f2f7fb;
+$neutral-surface: #ffffff;
+$neutral-border:  #dbe6ef;
+$neutral-muted:   #5b6b78;
+$neutral-text:    #13222c;
+
+// ---- Semantic ----
+$success: #2e7d4f;
+$danger:  #c0392b;
+$warning: #d98e04;
+$info:    #2f6fb0;
+
+// ---- Radii / shadows (shared design tokens) ----
+$radius-sm: 0.375rem;
+$radius:    0.625rem;
+$radius-lg: 1rem;
+
+// SCSS map so theme values are programmatically reusable in modules
+$theme: (
+  primary:         $brand-primary,
+  primary-dark:    $brand-primary-dark,
+  primary-light:   $brand-primary-light,
+  secondary:       $brand-secondary,
+  secondary-dark:  $brand-secondary-dark,
+  accent:          $brand-accent,
+  accent-dark:     $brand-accent-dark,
+  bg:              $neutral-bg,
+  surface:         $neutral-surface,
+  border:          $neutral-border,
+  muted:           $neutral-muted,
+  text:            $neutral-text,
+  success:         $success,
+  danger:          $danger,
+  warning:         $warning,
+  info:            $info,
+);
+
+// Helper so SCSS modules can read a token: color: theme(primary);
+@function theme($key) {
+  @return map-get($theme, $key);
+}
+
+// Emit every token as a CSS custom property on :root.
+// Prefixed `--c-` so it never collides with Tailwind v4's own
+// `--color-*` namespace; globals.css maps `--c-*` -> Tailwind tokens.
+:root {
+  @each $name, $value in $theme {
+    --c-#{$name}: #{$value};
+  }
+  --radius-sm: #{$radius-sm};
+  --radius:    #{$radius};
+  --radius-lg: #{$radius-lg};
+}

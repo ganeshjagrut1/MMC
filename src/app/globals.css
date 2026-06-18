@@ -1,26 +1,87 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+  Bridge the SCSS theme tokens (defined once in src/styles/theme.scss
+  as `--c-*` CSS variables) into Tailwind v4's design system.
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  Result: utilities like `bg-primary`, `text-accent`, `border-border`,
+  `bg-surface` all resolve to the single-source-of-truth SCSS colors.
+  Change a color in theme.scss -> it updates everywhere.
+*/
+@theme {
+  --color-primary: var(--c-primary);
+  --color-primary-dark: var(--c-primary-dark);
+  --color-primary-light: var(--c-primary-light);
+  --color-secondary: var(--c-secondary);
+  --color-secondary-dark: var(--c-secondary-dark);
+  --color-accent: var(--c-accent);
+  --color-accent-dark: var(--c-accent-dark);
+
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-border: var(--c-border);
+  --color-muted: var(--c-muted);
+  --color-text: var(--c-text);
+
+  --color-success: var(--c-success);
+  --color-danger: var(--c-danger);
+  --color-warning: var(--c-warning);
+  --color-info: var(--c-info);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --radius-card: var(--radius);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font-geist-sans), system-ui, Arial, sans-serif;
+}
+
+/* Brand-colored focus ring for accessibility */
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 2px;
+}
+
+/* Scrolling notices ticker */
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: ticker-scroll 30s linear infinite;
+}
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* Ambient slow zoom for the hero background image */
+@keyframes hero-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+.hero-zoom {
+  animation: hero-zoom 18s ease-out forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-zoom {
+    animation: none;
+  }
 }

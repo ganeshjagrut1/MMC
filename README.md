@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mauli Medical College — Website
 
-## Getting Started
+A dynamic website for **Mauli Medical College, Hospital & Research Center**, built with
+**Next.js 16 (App Router) + Supabase + Tailwind v4 + SCSS + Motion**.
 
-First, run the development server:
+Every page's content is editable from a protected **admin panel** — no code changes
+needed to update text, departments, faculty, news or to read contact messages.
+
+---
+
+## Tech stack
+
+| Concern        | Choice                                              |
+| -------------- | --------------------------------------------------- |
+| Framework      | Next.js 16 (App Router, Server Components, Actions)  |
+| Database/Auth  | Supabase (Postgres + Row Level Security + Auth)      |
+| Styling        | Tailwind CSS v4 (`@theme`) + SCSS theme tokens       |
+| Animations     | Motion (`motion/react`)                              |
+| Language       | TypeScript                                           |
+
+---
+
+## One-time theme / colour setup
+
+All brand colours live in **one file**: [`src/styles/theme.scss`](src/styles/theme.scss).
+They are emitted as CSS variables and bridged into Tailwind in
+[`src/app/globals.css`](src/app/globals.css), so utilities like `bg-primary`,
+`text-accent`, `bg-surface` all trace back to that single source. Change a colour
+there and it updates across the whole site.
+
+---
+
+## Getting started
+
+### 1. Use the right Node version
+
+```bash
+nvm use            # reads .nvmrc (Node 20)
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure Supabase
+
+`.env.local` already contains the project URL. Add your **publishable / anon key**:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://jwwzphaoqdzccujavces.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_xxxxxxxxxxxxxxxxxxxxx
+```
+
+> Find it in **Supabase Dashboard → Project Settings → API Keys → Publishable key**.
+> The publishable key is safe in the browser; RLS protects your data.
+> Never put the **secret** key in this file.
+
+### 4. Create the database schema
+
+Open **Supabase Dashboard → SQL Editor → New query**, paste the contents of
+[`supabase/schema.sql`](supabase/schema.sql), and run it. This creates all tables,
+Row-Level-Security policies, and seeds the 21 departments + sample news.
+
+### 5. Create an admin user
+
+In **Supabase Dashboard → Authentication → Users → Add user**, create a user with an
+email + password (and tick "Auto confirm"). That account can sign in at `/admin`.
+
+### 6. Run the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Public site: <http://localhost:3000>
+- Admin panel: <http://localhost:3000/admin>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Admin panel
 
-## Learn More
+Sign in at `/admin`. From there you can edit:
 
-To learn more about Next.js, take a look at the following resources:
+| Section          | What it controls                                              |
+| ---------------- | ------------------------------------------------------------ |
+| **Page Content** | Home hero/stats/highlights, About, Admissions, site info — all text on the "static" pages, via friendly forms. |
+| **Departments**  | The 21 department pages (add / edit / delete / reorder).      |
+| **Faculty**      | Faculty profiles.                                            |
+| **News**         | News & notices, with draft/published status.                |
+| **Messages**     | Contact-form submissions (mark handled / delete).           |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Changes are reflected on the public site immediately (pages are revalidated on save).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Project structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+  app/
+    (site)/            Public pages (home, about, departments, faculty, news, admissions, contact)
+    admin/             Protected admin panel (login + dashboard + CRUD + content editor)
+  components/
+    layout/            Header, footer, page hero
+    ui/                Motion primitives + styled primitives (Button, Card, Section…)
+    admin/             Admin nav, form helpers, content editor
+  lib/
+    supabase/          Browser + server clients, proxy/session helper, DB types
+    content-schema.ts  Editable content blocks (defaults + form schema)
+    content.ts         Server accessors for content
+    data.ts            Data-access helpers (departments, faculty, news)
+    site.ts            Navigation + static site constants
+  styles/
+    theme.scss         ⭐ single source of truth for brand colours
+  proxy.ts             Auth session refresh + /admin route protection
+supabase/
+  schema.sql           Database schema, RLS policies, seed data
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Useful commands
+
+```bash
+npm run dev      # start dev server
+npm run build    # production build
+npm run start    # run the production build
+npm run lint     # lint
+```
