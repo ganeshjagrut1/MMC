@@ -731,6 +731,122 @@ export const CONTENT_BLOCKS = {
       ],
     },
   },
+  page_officers: {
+    key: "page_officers",
+    title: "Top Officers of the University",
+    description:
+      "University officers shown on the College → Top Officers page.",
+    fields: [
+      { name: "subtitle", label: "Page subtitle", type: "textarea" },
+      {
+        name: "officers",
+        label: "Officers",
+        type: "objects",
+        fields: [
+          { name: "name", label: "Name", type: "text" },
+          { name: "role", label: "Designation", type: "text" },
+          { name: "office", label: "Office / second line", type: "text" },
+          { name: "photo", label: "Photo", type: "image" },
+        ],
+      },
+    ],
+    default: {
+      subtitle:
+        "The statutory officers of the Maharashtra University of Health Sciences (MUHS), Nashik — our affiliating university.",
+      officers: [
+        {
+          name: "Hon'ble Shri. Jishnu Dev Varma",
+          role: "Chancellor",
+          office: "Governor of Maharashtra",
+          photo: "/images/officers/chancellor.jpg",
+        },
+        {
+          name: "Shri. Hasan Mushrif",
+          role: "Pro-Chancellor",
+          office: "Minister of Medical Education",
+          photo: "/images/officers/pro-chancellor.jpg",
+        },
+        {
+          name: "Prof. Sanjeev Sonawane",
+          role: "Vice-Chancellor",
+          office: "Additional Charge",
+          photo: "/images/officers/vice-chancellor.jpg",
+        },
+        {
+          name: "Dr. Rajendra Bangal",
+          role: "Registrar",
+          office: "",
+          photo: "/images/officers/registrar.jpg",
+        },
+        {
+          name: "Prof. Dr. Sandeep S. Kadu",
+          role: "Controller of Examinations",
+          office: "",
+          photo: "/images/officers/controller-of-examinations.jpg",
+        },
+      ],
+    },
+  },
+
+  page_anti_ragging: {
+    key: "page_anti_ragging",
+    title: "Anti-Ragging Committee page",
+    description:
+      "Toll-free helpline number and the Anti-Ragging Committee document.",
+    fields: [
+      { name: "subtitle", label: "Page subtitle", type: "textarea" },
+      {
+        name: "tollFreeDisplay",
+        label: "Toll-free number (as shown)",
+        type: "text",
+        help: "How the number is displayed, e.g. 1800 929 4323.",
+      },
+      {
+        name: "tollFreeTel",
+        label: "Toll-free number (digits only)",
+        type: "text",
+        help: "Digits only, used for the click-to-call link, e.g. 18009294323.",
+      },
+      { name: "pdf_url", label: "Committee document (PDF)", type: "file" },
+    ],
+    default: {
+      subtitle:
+        "Ragging in any form is strictly prohibited. Committee members and the toll-free helpline are published below.",
+      tollFreeDisplay: "1800 929 4323",
+      tollFreeTel: "18009294323",
+      pdf_url: "/docs/anti-ragging-committee.pdf",
+    },
+  },
+
+  page_gender_harassment: {
+    key: "page_gender_harassment",
+    title: "Gender Harassment Committee page",
+    description:
+      "The Gender Harassment (Internal Complaints) Committee document.",
+    fields: [
+      { name: "subtitle", label: "Page subtitle", type: "textarea" },
+      {
+        name: "tollFreeDisplay",
+        label: "Helpline number (as shown)",
+        type: "text",
+        help: "How the number is displayed, e.g. 1800 929 4323. Leave blank to hide.",
+      },
+      {
+        name: "tollFreeTel",
+        label: "Helpline number (digits only)",
+        type: "text",
+        help: "Digits only, used for the click-to-call link, e.g. 18009294323.",
+      },
+      { name: "pdf_url", label: "Committee document (PDF)", type: "file" },
+    ],
+    default: {
+      subtitle:
+        "The Internal Complaints Committee for prevention and redressal of sexual / gender harassment. Members and contact details are published below.",
+      tollFreeDisplay: "",
+      tollFreeTel: "",
+      pdf_url: "/docs/gender-harassment-committee.pdf",
+    },
+  },
 } as const;
 
 export type ContentKey = keyof typeof CONTENT_BLOCKS;

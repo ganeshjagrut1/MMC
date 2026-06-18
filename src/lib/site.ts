@@ -12,7 +12,12 @@ export const SITE = {
     "Anjani Khurd, Tal: Lonar, Dist: Buldhana, Maharashtra 443302",
 };
 
-export type NavLink = { label: string; href: string };
+export type NavLink = {
+  label: string;
+  href: string;
+  /** Optional dropdown sub-items (one level). */
+  children?: NavLink[];
+};
 
 export const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/" },
@@ -21,7 +26,16 @@ export const NAV_LINKS: NavLink[] = [
   { label: "Facilities", href: "/facilities" },
   { label: "Faculty", href: "/faculty" },
   { label: "Hospital", href: "/hospital" },
-  { label: "College", href: "/college" },
+  {
+    label: "College",
+    href: "/college",
+    children: [
+      { label: "College Overview", href: "/college" },
+      { label: "Top Officers of the University", href: "/officers" },
+      { label: "Anti-Ragging", href: "/anti-ragging" },
+      { label: "Gender Harassment", href: "/gender-harassment" },
+    ],
+  },
   { label: "Clinical Material", href: "/clinical-material" },
   { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
