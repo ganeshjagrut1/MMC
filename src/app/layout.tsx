@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/theme.scss"; // one-time theme tokens (emits --c-* CSS vars)
 import "./globals.css";
@@ -89,6 +90,20 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-bg text-text">
         {children}
       </body>
+      {/* Google tag (gtag.js) */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-D83WWR7NTX"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-D83WWR7NTX');
+        `}
+      </Script>
     </html>
   );
 }
