@@ -5,7 +5,11 @@ import { Section, Card } from "@/components/ui/primitives";
 import { Stagger, StaggerItem } from "@/components/ui/motion";
 import { getContent } from "@/lib/content";
 
-export const metadata: Metadata = { title: "Facilities" };
+export const metadata: Metadata = {
+  title: "Facilities",
+  description:
+    "Campus facilities at Mauli Medical College — central library, modern laboratories, lecture halls, hostels and teaching equipment that support quality medical education.",
+};
 
 export default async function FacilitiesPage() {
   const content = await getContent("page_facilities");

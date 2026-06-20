@@ -4,7 +4,11 @@ import { Section } from "@/components/ui/primitives";
 import { getContent } from "@/lib/content";
 import { GalleryGrid } from "@/components/gallery-grid";
 
-export const metadata: Metadata = { title: "Gallery" };
+export const metadata: Metadata = {
+  title: "Gallery",
+  description:
+    "Photo gallery of Mauli Medical College, Hospital & Research Center — campus, laboratories, events and student life in Anjani Khurd, Buldhana, Maharashtra.",
+};
 
 export default async function GalleryPage() {
   const content = await getContent("page_gallery");

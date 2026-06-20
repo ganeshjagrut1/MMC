@@ -89,7 +89,7 @@ export function OrganizationJsonLd() {
 export function BreadcrumbJsonLd({
   items,
 }: {
-  items: { name: string; path: string }[];
+  items: { name: string; path?: string }[];
 }) {
   const data = {
     "@context": "https://schema.org",
@@ -98,7 +98,8 @@ export function BreadcrumbJsonLd({
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      item: `${BASE}${item.path}`,
+      // The last crumb (the current page) may omit its URL per schema.org.
+      ...(item.path ? { item: `${BASE}${item.path}` } : {}),
     })),
   };
   return <JsonLd data={data} />;

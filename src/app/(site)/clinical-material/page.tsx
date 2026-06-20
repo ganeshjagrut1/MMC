@@ -5,7 +5,11 @@ import { FadeIn } from "@/components/ui/motion";
 import { getContent } from "@/lib/content";
 import { PdfViewer } from "@/components/pdf-viewer";
 
-export const metadata: Metadata = { title: "Clinical Material" };
+export const metadata: Metadata = {
+  title: "Clinical Material",
+  description:
+    "Clinical material and patient statistics at the Mauli Medical College teaching hospital, supporting hands-on clinical training for MBBS students in Buldhana, Maharashtra.",
+};
 
 export default async function ClinicalMaterialPage() {
   const content = await getContent("page_clinical");

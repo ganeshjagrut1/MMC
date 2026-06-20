@@ -6,7 +6,11 @@ import { getContent } from "@/lib/content";
 import { getDepartments } from "@/lib/data";
 import { DepartmentCard } from "@/components/department-card";
 
-export const metadata: Metadata = { title: "Academics" };
+export const metadata: Metadata = {
+  title: "Academics",
+  description:
+    "Explore the MBBS curriculum, academic programs and the pre-clinical, para-clinical and clinical departments at Mauli Medical College, Buldhana — structured to NMC standards.",
+};
 
 export default async function AcademicsPage() {
   const [content, departments] = await Promise.all([

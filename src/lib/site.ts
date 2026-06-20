@@ -15,7 +15,7 @@ export const SITE = {
    * (metadata, canonical tags, sitemap, robots, JSON-LD, llms.txt). This is the
    * LIVE domain; do not change it without updating Google Search Console too.
    */
-  url: "https://maulimedicalcollege.in",
+  url: "https://www.maulimedicalcollege.in",
   /** Public social/profile URLs — used as schema.org `sameAs` for entity SEO. */
   sameAs: [
     "https://www.facebook.com/maulimedicalcollege",

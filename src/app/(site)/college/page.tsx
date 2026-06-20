@@ -5,7 +5,11 @@ import { Section, Card } from "@/components/ui/primitives";
 import { FadeIn, Stagger, StaggerItem } from "@/components/ui/motion";
 import { getContent } from "@/lib/content";
 
-export const metadata: Metadata = { title: "College" };
+export const metadata: Metadata = {
+  title: "College",
+  description:
+    "About Mauli Medical College, Hospital & Research Center — college overview, university officers, and anti-ragging and anti-harassment information for students and parents.",
+};
 
 type LinkItem = { label: string; href: string };
 

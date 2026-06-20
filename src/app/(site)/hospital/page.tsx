@@ -5,7 +5,11 @@ import { Section, Card, SectionHeading } from "@/components/ui/primitives";
 import { FadeIn, Stagger, StaggerItem } from "@/components/ui/motion";
 import { getContent } from "@/lib/content";
 
-export const metadata: Metadata = { title: "Hospital" };
+export const metadata: Metadata = {
+  title: "Hospital",
+  description:
+    "The attached multi-speciality teaching hospital of Mauli Medical College provides patient care and clinical training across all major departments in Buldhana, Maharashtra.",
+};
 
 const CLINICAL_DEPARTMENTS = [
   { label: "General Medicine", slug: "general-medicine" },

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Container } from "@/components/ui/primitives";
 import { FadeIn } from "@/components/ui/motion";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 
 /** Compact hero banner used at the top of inner pages. */
 export function PageHero({
@@ -8,15 +9,22 @@ export function PageHero({
   subtitle,
   breadcrumb,
   image,
+  path,
 }: {
   title: string;
   subtitle?: string;
   breadcrumb?: string;
   /** Optional background image path. */
   image?: string;
+  /** Current page path (e.g. "/facilities") — adds the page URL to the breadcrumb. */
+  path?: string;
 }) {
   return (
     <section className="relative overflow-hidden bg-secondary text-white">
+      {/* Tells Google the Home › {page} hierarchy for a breadcrumb in results. */}
+      <BreadcrumbJsonLd
+        items={[{ name: "Home", path: "/" }, { name: title, path }]}
+      />
       {image && (
         <>
           <Image
