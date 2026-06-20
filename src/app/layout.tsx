@@ -15,28 +15,43 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://maulimedicalcollege.com"),
+  metadataBase: new URL(SITE.url),
   title: {
-    default: SITE.name,
+    // Lead with the exact brand query so "Mauli Medical College" ranks the
+    // homepage; the rest of the phrase carries supporting keywords.
+    default: `${SITE.shortName} | MBBS Admission, Hospital & Research Center, Buldhana`,
     template: `%s | ${SITE.shortName}`,
   },
-  description: `${SITE.name} — ${SITE.tagline}. Located at ${SITE.address}.`,
+  description: `${SITE.name} (${SITE.established}) — NMC-approved MBBS college offering quality medical education, a multi-speciality teaching hospital and research in ${SITE.address}. Apply for NEET-based MBBS admission.`,
   keywords: [
     "Mauli Medical College",
-    "MBBS admission",
+    "Mauli Medical College Buldhana",
+    "Mauli Medical College Anjani Khurd",
+    "MBBS admission Maharashtra",
     "medical college Maharashtra",
     "Buldhana medical college",
-    "Anjani Khurd",
-    "NEET MBBS",
+    "Anjani Khurd Lonar",
+    "NEET MBBS admission",
     "hospital and research centre",
   ],
   applicationName: SITE.shortName,
+  authors: [{ name: SITE.name, url: SITE.url }],
+  creator: SITE.name,
+  publisher: SITE.name,
+  category: "education",
+  alternates: { canonical: "/" },
+  // Paste the token from Google Search Console → Settings → Ownership
+  // verification → HTML tag (the `content` value) to confirm ownership.
+  verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
+  formatDetection: { telephone: true, address: true, email: true },
   icons: {
     icon: "/icon.png",
     apple: "/apple-icon.png",
   },
   openGraph: {
     type: "website",
+    locale: "en_IN",
+    url: SITE.url,
     siteName: SITE.name,
     title: SITE.name,
     description: `${SITE.tagline}. Located at ${SITE.address}.`,
@@ -48,7 +63,17 @@ export const metadata: Metadata = {
     description: SITE.tagline,
     images: ["/brand/logo.png"],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export default function RootLayout({

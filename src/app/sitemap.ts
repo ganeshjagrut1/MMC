@@ -2,8 +2,9 @@ import type { MetadataRoute } from "next";
 import { DEFAULT_DEPARTMENTS } from "@/lib/departments-data";
 import { CONTENT_BLOCKS } from "@/lib/content-schema";
 import { getPublishedNews } from "@/lib/data";
+import { SITE } from "@/lib/site";
 
-const BASE = "https://maulimedicalcollege.com";
+const BASE = SITE.url;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();

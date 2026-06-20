@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { NAV_LINKS, SITE } from "@/lib/site";
 import { Container, ButtonLink } from "@/components/ui/primitives";
 import { Logo } from "@/components/layout/logo";
+import { AISearch } from "@/components/ai-search/ai-search";
 
 export function SiteHeader({
   brand,
@@ -57,7 +58,8 @@ export function SiteHeader({
             </span>
           </Link>
 
-          <div className="hidden lg:block">
+          <div className="hidden items-center gap-3 lg:flex">
+            <AISearch />
             <ButtonLink href="/contact" variant="accent">
               Contact Us
             </ButtonLink>
@@ -182,6 +184,9 @@ export function SiteHeader({
                   )}
                 </div>
               ))}
+              <div className="mt-2">
+                <AISearch className="w-full justify-center" />
+              </div>
               <ButtonLink
                 href="/contact"
                 variant="accent"

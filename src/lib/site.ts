@@ -10,6 +10,17 @@ export const SITE = {
   phoneAlt: "+91 9860161212",
   address:
     "Anjani Khurd, Tal: Lonar, Dist: Buldhana, Maharashtra 443302",
+  /**
+   * Canonical origin — the single source of truth for every SEO surface
+   * (metadata, canonical tags, sitemap, robots, JSON-LD, llms.txt). This is the
+   * LIVE domain; do not change it without updating Google Search Console too.
+   */
+  url: "https://maulimedicalcollege.in",
+  /** Public social/profile URLs — used as schema.org `sameAs` for entity SEO. */
+  sameAs: [
+    "https://www.facebook.com/maulimedicalcollege",
+    "https://www.instagram.com/maulimedicalcollege",
+  ],
 };
 
 export type NavLink = {
